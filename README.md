@@ -46,7 +46,7 @@
 │   │   ├── new-item.js
 │   │   └── remove-stock.js
 │   │ 
-│   ├── helper-functions
+│   ├── utils
 │   │   └── json.js
 │   │ 
 │   └── routes
@@ -68,4 +68,11 @@
 ## Plan
 
 - Add a shopping cart
+- Make some handlers for the cart
+- Draw the flow of the app out
+
 - Think about the filters
+  - By category
+  - By price high to low
+  - By price low to high
+  - Rating
