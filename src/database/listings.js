@@ -4,7 +4,7 @@ import db from "./connection.js";
 export function dbAddListing(listing) {
   db.prepare(
     "INSERT INTO listings (id, name, description, price, rating, status, category, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-  ).run([
+  ).run(
     listing.id,
     listing.name,
     listing.description,
@@ -13,21 +13,20 @@ export function dbAddListing(listing) {
     "available",
     listing.category,
     listing.image,
-  ]);
+  );
 }
 
 // Gets all the listings with all the data of each listing
 export function dbGetListings(querryMeassage, params) {
   const listings = db.prepare(querryMeassage).all(params);
-  console.log(listings);
   return listings;
 }
 
 // Get a specific listing data
 export function dbGetListing(listingId) {
-  const listing = db.prepare(`SELECT * FROM listings WHERE id=?`).get([
+  const listing = db.prepare(`SELECT * FROM listings WHERE id=?`).get(
     listingId,
-  ]);
+  );
   return listing;
 }
 
@@ -35,6 +34,6 @@ export function dbGetListing(listingId) {
 export function dbBuy(listingId) {
   const updated = db.prepare(
     `UPDATE listings SET status = 'sold' WHERE id = ? AND status = 'available' RETURNING *`,
-  ).run([listingId]);
+  ).run(listingId);
   return updated;
 }

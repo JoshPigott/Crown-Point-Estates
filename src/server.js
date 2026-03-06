@@ -1,54 +1,34 @@
-import { join } from "@std/path";
-import { serveFile } from "@std/http/file-server";
+// importing middleware
+import { serveStaticFiles } from "./middleware/server-static-files.js";
+import { getSubdomain } from "./middleware/get-subdomain.js";
 
-import json from "./utils/json.js";
+import { getCompiledTable } from "./routes/index.js";
 import dbNewTables from "./database/schema.js";
-
-import compile from "./routes/index.js";
+import { deleteExpiredSessions } from "./services/sessions.js";
+import json from "./utils/json.js";
 
 // sets up tables for databasehttp://localhost:8000/index.html
 dbNewTables();
+deleteExpiredSessions();
 
-// Checks if the file exists or not
-async function isFile(filepath) {
-  try {
-    const fileInfo = await Deno.stat(filepath);
-    return fileInfo.isFile;
-  } catch (_err) {
-    return false;
-  }
-}
-
-async function serveStaticFiles(req, pathname) {
-  const currworkingDir = Deno.cwd();
-  const filepath = join(currworkingDir, "/src/public", pathname);
-
-  // returns a default of index.html
-  if (pathname === "/") {
-    return await serveFile(req, join(currworkingDir, "src/public/index.html"));
-  }
-  // serves the static file
-  if (await isFile(filepath)) {
-    return await serveFile(req, filepath);
-  } // There is no static file
-  else {
-    return null;
-  }
-}
+// function
 
 async function server(req) {
+  const subdomain = getSubdomain(req);
   const url = new URL(req.url);
   const pathname = url.pathname;
   const method = req.method;
   console.log(`There has been a request from ${pathname}`);
 
   // If a static file it gets served
-  const staticFile = await serveStaticFiles(req, pathname);
+  const staticFile = await serveStaticFiles(req, pathname, subdomain);
   if (staticFile != null) {
     return staticFile;
   }
-  // Routes the request with pathname and method
-  for (const r of compile) {
+
+  // Routes the request with pathname and method and subdomian
+  const compiledTable = getCompiledTable(subdomain);
+  for (const r of compiledTable) {
     if (r.method !== method) continue;
 
     const matches = r.pattern.exec({ pathname: pathname });

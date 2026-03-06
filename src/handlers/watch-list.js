@@ -3,15 +3,13 @@ import {
   dbDeleteWatchList,
   dbGetWatchList,
 } from "../database/watch-list.js";
-import { dbGetListing, dbGetListings } from "../database/listings.js";
+import { dbGetListing } from "../database/listings.js";
 import { getSession } from "../services/sessions.js";
 
 // Adds listing to the watch list
 export function addToWatchList(ctx) {
   const listingId = ctx.params.listingId;
-  console.log(listingId);
 
-  console.log("all Listings:", dbGetListings(`SELECT * FROM listings`));
   const listing = dbGetListing(listingId);
   const sessionId = getSession(ctx.req);
 

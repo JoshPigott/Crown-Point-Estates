@@ -2,12 +2,25 @@
 
 import newSession from "../handlers/new-session.js";
 import { createListing, getListings, listingPage, buy }from "../handlers/listings.js";
-import { addToWatchList, getWatchList, removeFromWatchList } from "../handlers/watch-list.js"
+import { addToWatchList, getWatchList, removeFromWatchList } from "../handlers/watch-list.js";
+import { isValidPassword, newAccount } from "../handlers/account.js";
 
-// Some of these routes will need to be protected later on
-const routingTable = [  
+import { isLogin } from "../middleware/protect-routes.js"
+
+// Routes possible on admin subdomain 
+const routingTableAdmin = [  
+  {method: "POST",   path: "/create-session",                handler: newSession}, 
+  {method: "POST",   path: "/login",                         handler: isValidPassword},
+  {method: "POST",   path: "/new-account",                   handler: newAccount},
+  {method: "POST",   path: "/create-listing",                handler: isLogin(createListing)},
+  {method: "GET",    path: "/get-listings",                  handler: isLogin(getListings)}, 
+  {method: "GET",    path: "/get-listing-page/:listingId",   handler: isLogin(listingPage)},
+  {method: "GET",    path: "/buy/:listingId",                handler: isLogin(buy)}, 
+];
+
+// Public routes
+const routingTablePublic = [  
   {method: "POST",   path: "/create-session",                handler: newSession},
-  {method: "POST",   path: "/create-listing",                handler: createListing},
   {method: "GET",    path: "/get-listings",                  handler: getListings},
   {method: "GET",    path: "/get-listing-page/:listingId",   handler: listingPage},
   {method: "GET",    path: "/buy/:listingId",                handler: buy},
@@ -16,12 +29,25 @@ const routingTable = [
   {method: "DELETE", path: "/watch-list-delete/:listingId",  handler: removeFromWatchList}, 
 ];
 
+// Caches the tables for speed and cleaness
+const compiledTableAdmin = routingTableAdmin.map((r) => ({
+    method: r.method.toUpperCase(),
+    pattern: new URLPattern({ pathname: r.path }),
+    handler: r.handler,
+  }));
 
-// Caches the table for speed and cleaness
-const compile = routingTable.map((r) => ({
-  method: r.method.toUpperCase(),
-  pattern: new URLPattern({ pathname: r.path }),
-  handler: r.handler,
-}));
+const compiledTablePublic = routingTablePublic.map((r) => ({
+    method: r.method.toUpperCase(),
+    pattern: new URLPattern({ pathname: r.path }),
+    handler: r.handler,
+  }));
 
-export default compile;
+// Gets compiled table 
+export function getCompiledTable(subdomain){
+  if (subdomain === "admin"){
+    return compiledTableAdmin;
+  }
+  else{
+    return compiledTablePublic;
+  }
+}
