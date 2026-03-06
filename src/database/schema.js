@@ -6,7 +6,14 @@ function dbNewTables() {
     .run();
 
   // Stores session ids
-  db.prepare(`CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY)`)
+  db.prepare(
+    `CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY, login BOOLEAN, expiryTime TEXT)`,
+  )
     .run();
+
+  // Creates table for admin accounts
+  db.prepare(
+    `CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT)`,
+  ).run();
 }
 export default dbNewTables;

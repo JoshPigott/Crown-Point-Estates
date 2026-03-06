@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@da/bcrypt@^1.0.1": "1.0.1",
     "jsr:@db/sqlite@0.13.0": "0.13.0",
     "jsr:@denosaurs/plug@1": "1.1.0",
     "jsr:@std/cli@^1.0.28": "1.0.28",
@@ -21,6 +22,9 @@
     "jsr:@std/streams@^1.0.17": "1.0.17"
   },
   "jsr": {
+    "@da/bcrypt@1.0.1": {
+      "integrity": "d2172d3acbcff52e0465557a1a48b1ff1c92df08c90712dae5372255a8c45eb3"
+    },
     "@db/sqlite@0.13.0": {
       "integrity": "4545c635e0b3d4ddfdc0f2240f932f24b8ad0178e9c2e3a0f9403e7b18ae2fb5",
       "dependencies": [
@@ -206,6 +210,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@da/bcrypt@^1.0.1",
       "jsr:@db/sqlite@0.13.0",
       "jsr:@std/http@^1.0.25",
       "jsr:@std/path@^1.1.4"

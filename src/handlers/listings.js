@@ -20,8 +20,6 @@ export async function createListing(ctx) {
   const category = body.category;
   const image = body.image;
 
-  console.log("The listing is:", id);
-
   const listing = { id, name, description, price, rating, category, image };
   dbAddListing(listing);
 
@@ -44,6 +42,8 @@ function getQuerryMeassage(conditions, order) {
 // Gets specific listings in the database with their data
 export function getListings(ctx) {
   const filters = new URLSearchParams(ctx.url.searchParams);
+  // Whitelist filters so it prevents any input from being enter in (security)
+  const filtersAllowed = ["rating", "category", "status"];
   const conditions = [];
   const order = [];
   const params = [];
@@ -51,12 +51,16 @@ export function getListings(ctx) {
   for (const [key, value] of filters.entries()) { // This is not going to work Object.entries(filters)
     // filter with ORDER
     if (key === "price_order") {
-      console.log(value);
-      order.push(`price ${value}`);
+      // Prevents any input from being enter in (security)
+      if (value === "ASC" || value === "DESC") {
+        order.push(`price ${value}`);
+      }
     } // filter with WHERE
     else {
-      conditions.push(`${key} = ?`);
-      params.push(value);
+      if (filtersAllowed.includes(key)) {
+        conditions.push(`${key} = ?`);
+        params.push(value);
+      }
     }
   }
 
@@ -81,12 +85,10 @@ export function buy(ctx) {
   const listingId = ctx.params.listingId;
   // Updated to state if you brought the house or not to void race condation
   const updated = dbBuy(listingId);
-  console.log(updated);
-  console.log(typeof updated);
   if (updated === 1) {
     return new Response("Transaction was successful", { status: 200 }); // Later on this will be htmx
   } else {
-    console.log("Unable to buy house");
+    console.log("Unable to buy the house");
     return new Response("Unable to buy house", { status: 409 }); // Later on this will be htmx
   }
 }

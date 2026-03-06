@@ -8,18 +8,18 @@ export function dbCreateNewWatchList(sessionId) {
 }
 
 export function dbAddWatchList(sessionId, id, listingId, name, price) {
-  db.prepare(`INSERT INTO "watchList-${sessionId}" VALUES(?,?,?,?)`).run([
+  db.prepare(`INSERT INTO "watchList-${sessionId}" VALUES(?,?,?,?)`).run(
     id,
     listingId,
     name,
     price,
-  ]);
+  );
 }
 
 export function dbDeleteWatchList(sessionId, listingId) {
-  db.prepare(`DELETE FROM "watchList-${sessionId}" WHERE listingId=?`).run([
+  db.prepare(`DELETE FROM "watchList-${sessionId}" WHERE listingId=?`).run(
     listingId,
-  ]);
+  );
 }
 
 export function dbGetWatchList(sessionId) {
