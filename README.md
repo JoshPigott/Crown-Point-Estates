@@ -96,4 +96,3 @@
         ├── listings-page-template.js
         └── listings-template.js
 ```
-
