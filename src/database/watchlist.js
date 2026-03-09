@@ -1,38 +1,37 @@
 import db from "./connection.js";
 
-export function dbCreateWatchlist(sessionId) {
-  // watchlist-${sessionId} is in " " as it contains - so it gets interpreted as a string
-  db.prepare(
-    `CREATE TABLE IF NOT EXISTS "watchlist-${sessionId}" (listingId TEXT PRIMARY KEY)`,
-  ).run();
-}
-
 export function dbAddToWatchlist(sessionId, listingId) {
-  db.prepare(`INSERT INTO "watchlist-${sessionId}" VALUES(?)`).run(
+  db.prepare(`INSERT INTO watchlist (sessionId, listingId) VALUES(?, ?)`).run(
+    sessionId,
     listingId,
   );
 }
 
 export function dbRemoveFromWatchlist(sessionId, listingId) {
-  db.prepare(`DELETE FROM "watchlist-${sessionId}" WHERE listingId=?`).run(
+  db.prepare(`DELETE FROM watchlist WHERE sessionId=? AND listingId=?`).run(
+    sessionId,
     listingId,
   );
 }
 
+// Returns all the user listings id in their watch list
 export function dbGetWatchlist(sessionId) {
-  const watchlist = db.prepare(`SELECT * FROM "watchlist-${sessionId}"`).all();
+  const watchlist = db.prepare(`SELECT * FROM watchlist WHERE sessionId=?`).all(
+    sessionId,
+  );
   return watchlist;
 }
 
-// Deletes when session end so number of tables/watch list don't build up
-export function dbDeleteWatchlist(sessionId) {
-  db.prepare(`DROP TABLE IF EXISTS "watchlist-${sessionId}"`).run();
+// Deletes when session end so number of rows don't bulid up
+export function dbClearWatchlist(sessionId) {
+  db.prepare(`DELETE FROM watchlist WHERE sessionId=?`).run(sessionId);
 }
 
+// Checks if a listing is in the user watchlist
 export function dbIsInWatchlist(sessionId, listingId) {
   const res = db.prepare(
-    `SELECT * FROM "watchlist-${sessionId}" WHERE listingId=?`,
-  ).get(listingId);
+    `SELECT * FROM watchlist WHERE sessionId=? AND listingId=?`,
+  ).get(sessionId, listingId);
   if (res === undefined) {
     return false;
   }

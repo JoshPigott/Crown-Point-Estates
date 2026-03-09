@@ -15,5 +15,9 @@ function dbNewTables() {
   db.prepare(
     `CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT)`,
   ).run();
+
+  // Watch list table
+  db.prepare(`CREATE TABLE IF NOT EXISTS watchlist (sessionId TEXT,
+     listingId TEXT, PRIMARY KEY (sessionId, listingId))`).run();
 }
 export default dbNewTables;

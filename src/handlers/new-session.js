@@ -1,10 +1,7 @@
 import { createSession } from "../services/sessions.js";
-import { dbCreateWatchlist } from "../database/watchlist.js";
 
 function newSession(_ctx) {
   const sessionId = createSession();
-  // Create a watch list for the user
-  dbCreateWatchlist(sessionId);
   console.log("session created:", sessionId);
   return new Response(null, {
     status: 204,
