@@ -8,12 +8,16 @@ function dbNewTables() {
   // Stores session ids
   db.prepare(
     `CREATE TABLE IF NOT EXISTS sessions (sessionId TEXT PRIMARY KEY, login BOOLEAN, expiryTime TEXT)`,
-  )
-    .run();
+  ).run();
 
   // Creates table for admin accounts
   db.prepare(
     `CREATE TABLE IF NOT EXISTS accounts (username TEXT PRIMARY KEY, password TEXT)`,
   ).run();
+
+  // Watch list table
+  db.prepare(`CREATE TABLE IF NOT EXISTS watchlist (sessionId TEXT,
+     listingId TEXT, FOREIGN KEY (listingId) REFERENCES listings (id),
+     PRIMARY KEY (sessionId, listingId))`).run();
 }
 export default dbNewTables;
