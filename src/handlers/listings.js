@@ -19,7 +19,6 @@ export async function createListing(ctx) {
   const category = formData?.get("category");
   const image = formData?.get("image");
 
-
   const listing = { id, name, description, price, rating, category, image };
   try {
     dbAddListing(listing);
