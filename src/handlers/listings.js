@@ -1,6 +1,6 @@
 import { dbAddListing, dbBuy, dbGetListing } from "../database/listings.js";
 import { dbIsInWatchlist } from "../database/watchlist.js";
-import listingsView from "../views/listings/listings.js";
+import listingsView from "../views/home/listings.js";
 import listingPageView from "../views/listings/listings-page.js";
 import { getListingsService } from "../services/get-listings.js";
 import { getSession } from "../services/sessions.js";
@@ -12,14 +12,26 @@ export async function createListing(ctx) {
 
   // listing info
   const id = crypto.randomUUID();
-  const name = formData?.get("name");
-  const description = formData?.get("description");
-  const price = formData?.get("price");
-  const rating = formData?.get("rating");
+  const name = formData?.get("name") ?? "";
+  const address = formData?.get("address") ?? "";
+  const area = formData?.get("area") ?? "";
+  const description = formData?.get("description") ?? "";
+  const price = formData?.get("price") ?? "By negation";
+  const rating = formData?.get("rating") ?? "unable";
   const category = formData?.get("category");
   const image = formData?.get("image");
 
-  const listing = { id, name, description, price, rating, category, image };
+  const listing = {
+    id,
+    name,
+    address,
+    area,
+    description,
+    price,
+    rating,
+    category,
+    image,
+  };
   try {
     dbAddListing(listing);
     return htmlResponse(`Listing Added`, { status: 201 });

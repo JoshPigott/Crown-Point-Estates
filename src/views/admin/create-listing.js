@@ -9,7 +9,23 @@ export function createListingView() {
      name="name"
      maxlength="20"
      required>
-    
+
+    <label for="address">Address</label>
+    <input
+     type="text"
+     id="address"
+     name="address"
+     maxlength="35"
+     >
+
+    <label for="area">area</label>
+    <input
+     type="text"
+     id="area"
+     name="area"
+     maxlength="35"
+     >
+
     <label for="price">Price</label>
     <input
      type="number"

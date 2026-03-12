@@ -1,6 +1,6 @@
 import { registrationService, verifyLoginService } from "../services/auth.js";
 import { adminLoginView } from "../views/admin/admin-login.js";
-import { createListingView } from "../views/listings/create-listing.js";
+import { createListingView } from "../views/admin/create-listing.js";
 import htmlResponse from "../utils/html-response.js";
 
 // Logs in user in if username and password are valid
