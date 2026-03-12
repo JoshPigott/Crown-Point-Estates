@@ -1,4 +1,4 @@
-## My-Shop
+## Crown Point Estates
 
 - This project recreates real estate webstite
 

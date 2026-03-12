@@ -3,10 +3,13 @@ import db from "./connection.js";
 // Adds an listing to the database
 export function dbAddListing(listing) {
   db.prepare(
-    "INSERT INTO listings (id, name, description, price, rating, status, category, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    `INSERT INTO listings (id, name, address, area, description, price,
+     rating, status, category, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   ).run(
     listing.id,
     listing.name,
+    listing.address,
+    listing.area,
     listing.description,
     listing.price,
     listing.rating,

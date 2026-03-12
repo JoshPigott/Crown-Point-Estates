@@ -1,13 +1,13 @@
-import listingView from "../listing.js";
+import { listingView } from "../listing.js";
 
 function listingsView(listings) {
   if (listings.length === 0) return "";
 
   const html = listings.map((listing) =>
     /*html*/ ` 
-    <a href="/get-listing-page/${listing.id}">
+    <div class="listing-preview">
       ${listingView(listing)}
-    </a>  
+    </div>  
     `
   ).join("");
   return html;
