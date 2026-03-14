@@ -16,7 +16,7 @@ function listingPageView(listing, inWatchlist) {
       <header>
         <h1>Crown Point Estates</h1>
         <a href="/index.html" class="header__link">Home</a>
-        <a href="watchlist.html" class="header__link">Watch list</a>
+        <a href="/watchlist.html" class="header__link">Watch list</a>
       </header>
       <main>
         <div>This is an listing</div>
@@ -45,11 +45,12 @@ function listingPageView(listing, inWatchlist) {
 
     `;
 }
-
+// Adds listing to watchlist
 export function addButtonView(listingId) {
   return /*html*/ `<button hx-post="/watch-list-add/${listingId}" hx-swap="outerHTML">Add To Watch List</button>`;
 }
 
+// Removes listing from watchlist
 export function removeButtonView(listingId) {
   return /*html*/ `<button hx-delete="/watch-list-delete/${listingId}" hx-swap="outerHTML">Remove From Watch List</button>`;
 }
