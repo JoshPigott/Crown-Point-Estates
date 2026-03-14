@@ -59,11 +59,12 @@ export function getListings(ctx) {
 // Gets the page for an individual listing
 export function getListingPage(ctx) {
   const listingId = ctx.params.listingId;
+  console.log("This is the listing ID:", listingId);
   const sessionId = getSession(ctx.req);
+  console.log("This is the sessionId:", sessionId);
 
   const inWatchlist = dbIsInWatchlist(sessionId, listingId);
   const listing = dbGetListing(listingId);
-
   const html = listingPageView(listing, inWatchlist);
   return htmlResponse(html, { status: 200 });
 }

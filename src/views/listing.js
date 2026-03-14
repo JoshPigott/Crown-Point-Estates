@@ -10,8 +10,8 @@ export function listingFullView(listing) {
     <img src="/assets/listings-pics/${
     escapeHtml(listing?.imageFileName)
   }.jpg" alt="${escapeHtml(listing?.name)} image">
-    <h3>Price: $${escapeHtml(listing?.price)}</h3>
-    <h3>Rating: ${escapeHtml(listing?.rating)}/10</h3>
+    <h3>Price: $${listing?.price}</h3>
+    <h3>Rating: ${listing?.rating}/10</h3>
   `;
 
   return html;
@@ -22,7 +22,8 @@ export function listingView(listing) {
     <a href="/get-listing-page/${listing.id}">
       <img class=listing-preview__image src="/assets/listings-pics/${
     escapeHtml(listing?.imageFileName)
-  }.jpg" alt="${escapeHtml(listing?.name)} image">
+  }.jpg"
+       alt="${escapeHtml(listing?.name)} image">
     </a>  
     <div class="listing-preview__text">
       <h2>${escapeHtml(listing?.name)}</h2>

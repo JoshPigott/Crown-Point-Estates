@@ -16,7 +16,7 @@ function listingPageView(listing, inWatchlist) {
       <header>
         <h1>Crown Point Estates</h1>
         <a href="/index.html" class="header__link">Home</a>
-        <a href="watchlist.html" class="header__link">Watch list</a>
+        <a href="/watchlist.html" class="header__link">Watch list</a>
       </header>
       <main>
         <div>This is an listing</div>
