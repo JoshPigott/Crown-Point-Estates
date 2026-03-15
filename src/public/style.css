@@ -64,6 +64,41 @@ footer {
   text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 70px 70px;
+  }
+
+  footer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding: 70px 70px;
+  }
+
+  .footer__description {
+    width: 60vw;
+  }
+}
+
+/* gobal class */
+.watchlist__buttons {
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px;
+
+  background-color: #d9cbaf;
+  color: #0f0f0f;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--primary-font);
+}
+
+.watchlist__buttons:hover {
+  background-color: #c9b98d;
+}
+
 /* home page */
 .listing-preview__container {
   display: flex;
@@ -89,6 +124,18 @@ footer {
 
 .listing-preview__text h2 {
   font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .listing-preview__image {
+    width: 40vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .listing-preview__image {
+    width: 80vw;
+  }
 }
 
 /* admin page */
@@ -133,4 +180,81 @@ footer {
 .login__image {
   max-height: 300px;
   opacity: 0.4;
+}
+
+.login__message {
+  font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+  .login {
+    flex-direction: column;
+    max-height: none;
+  }
+  .login__form {
+    padding-bottom: 0;
+  }
+  .login__image {
+    max-height: none;
+    width: 100vw;
+    opacity: 0.4;
+  }
+}
+
+/* Individual listing page */
+
+.listing-full__text {
+  margin: 70px 100px;
+}
+.listing-full__text h2 {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.listing-full__text h3 {
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.listing-full__image {
+  width: 100%;
+}
+
+.listing-full__title {
+  padding-bottom: 20px;
+}
+.listing-full__description {
+  font-size: 14px;
+}
+
+.listing-full__details {
+  padding: 30px 0px;
+  border-top: 1px solid #838383;
+}
+.listing-full__contact {
+  padding: 30px 0px;
+  border-top: 1px solid #838383;
+}
+
+.listing-full__details-info {
+  margin-left: 10vw;
+}
+.listing-full__details-info p:not(:last-child) {
+  margin-bottom: 20px;
+}
+.listing-full__contact-info {
+  margin-left: 10vw;
+}
+.listing-full__contact-info p:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.listing-full__button {
+  padding: 30px 0px;
+  border-top: 1px solid #838383;
+}
+
+@media (max-width: 768px) {
+  .listing-full__text {
+    margin: 70px 70px;
+  }
 }

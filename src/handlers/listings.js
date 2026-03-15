@@ -78,9 +78,9 @@ export async function deleteListings(ctx) {
   // Delete listing image
   await Deno.remove(`${fileStoragePath}/${listing.imageFileName}.jpg`);
 
-  dbDeleteListing(listingId);
   // Deletes all listings in watchlists
   dbDeleteListingsById(listingId);
+  dbDeleteListing(listingId);
 
   return htmlResponse({ status: 204 });
 }
