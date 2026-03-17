@@ -4,12 +4,13 @@ import { listingView } from "../listing.js";
 function watchlistListingView(listings) {
   const html = listings.map((listing) =>
     /*html*/ ` 
-    <a class="watchlist__listing" href="/get-listing-page/${listing.id}">
+      <div class="watchlist__listing">
       ${listingView(listing)}
       <!--When the button is pressed, the listing is delete from the watchlist.
           Because hx-swap="delete" is used, the returned HTML is ignored.-->
-      <button hx-delete="/watch-list-delete/${listing.id}"
-       hx-target="closest a" hx-swap="delete">Remove From Watch List</button>
+      <button hx-delete="/watchlist-delete/${listing.id}" hx-target="closest div"
+       hx-swap="delete" hx-trigger="click" class="button">Remove From Watch List</button>
+      </div>
     `
   ).join("");
   return html;

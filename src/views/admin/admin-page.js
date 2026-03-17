@@ -16,7 +16,7 @@ export function adminPageView(loginStatus, listings) {
         crossorigin="anonymous"
       ></script>
       <link rel="stylesheet" href="/style.css">
-      <link rel="icon" href="assets/favicon.png">
+      <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
       <header>
@@ -39,7 +39,7 @@ export function adminPageView(loginStatus, listings) {
         >crownpointestates@gmail.com</a>
       </div>
     </footer>
-      <script src="./setup-session.js" type="module"></script>
+      <script src="/scripts/setup-session.js" type="module"></script>
     </body>
   </html>
 `;
@@ -48,8 +48,18 @@ export function adminPageView(loginStatus, listings) {
 // Main veiw when login
 export function adminMainView(listings) {
   const html = /*html*/ `
-  ${createListingView()}
-  ${deleteListingsView(listings)}
+    <div class="listings-create">
+      <h2 class="listings-create__title">Create New Listing</h2>
+      <div class="listings-create__container">${createListingView()}</div>
+    </div>
+  
+  
+    <div class="listings-delete">
+      <h2 class="listings-delete__title">Delete Listing</h2>
+      <div class="listings-delete__container">${
+    deleteListingsView(listings)
+  }</div>
+    </div>
   `;
   return html;
 }

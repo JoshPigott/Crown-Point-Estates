@@ -2,12 +2,12 @@ import { escapeHtml } from "../../utils/escape-html.js";
 
 // Adds listing to watchlist
 export function addButtonView(listingId) {
-  return /*html*/ `<button hx-post="/watch-list-add/${listingId}" hx-swap="outerHTML" class="watchlist__buttons">Add To Watch List</button>`;
+  return /*html*/ `<button hx-post="/watch-list-add/${listingId}" hx-swap="outerHTML" class="button">Add To Watch List</button>`;
 }
 
 // Removes listing from watchlist
 export function removeButtonView(listingId) {
-  return /*html*/ `<button hx-delete="/watch-list-delete/${listingId}" hx-swap="outerHTML" class="watchlist__buttons">Remove From Watch List</button>`;
+  return /*html*/ `<button hx-delete="/watchlist-delete/${listingId}" hx-swap="outerHTML" class="button">Remove From Watch List</button>`;
 }
 
 // Returns a detail version of the listing
@@ -74,7 +74,7 @@ function listingPageView(listing, inWatchlist) {
       <title>Crown Point Estates</title>
       <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js" integrity="sha384-/TgkGk7p307TH7EXJDuUlgG3Ce1UVolAOFopFekQkkXihi5u/6OCvVKyz1W+idaz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="/style.css">
-      <link rel="icon" href="assets/favicon.png">
+      <link rel="icon" href="/assets/favicon.png">
     </head>
     <body>
       <header>
@@ -99,7 +99,7 @@ function listingPageView(listing, inWatchlist) {
         >crownpointestates@gmail.com</a>
       </div>
     </footer>
-      <script src="/setup-session.js" type="module"></script>
+      <script src="/scripts/setup-session.js" type="module"></script>
     </body>
   </html>
 

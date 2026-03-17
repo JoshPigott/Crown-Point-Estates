@@ -6,6 +6,7 @@
 
 - Adding listings
 - A watch-list to check track of the listings
+- Adding and deleting listing by admin
 - filters (Not fully shipped yet)
 
 ## Requirements
@@ -27,7 +28,6 @@
 ```text
 ├── deno.json
 ├── deno.lock
-├── flow.md
 ├── README.md
 │
 ├── .vscode
@@ -66,6 +66,9 @@
     │   ├── style.css
     │   ├── watchlist.html
     │   │
+    │   ├── scripts
+    │   │   └── setup-session.js   
+    │   │   
     │   └── assets
     │       ├── favicon.png
     │       ├── login-pic.jpg
@@ -150,5 +153,8 @@
 - When the session expires, using the same tab causes errors. A new tab must be
   opened to start a new session.
 - Not all filter code is used.
+- Nothing redirect from admin page with create and delete listing when session
+  expires.
 - Anyone can create an admin account if they know the username must start with
   **agent** and use the admin subdomain.
+- The css on listing-create and listing-delete page could be better.

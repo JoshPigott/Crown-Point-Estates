@@ -8,7 +8,7 @@ export function adminLoginView(message = "") {
          type="text"
          name="username"
          id="username"
-         maxlength="10"
+         maxlength="16"
          required>
       </div>
 
@@ -23,8 +23,8 @@ export function adminLoginView(message = "") {
           required>
       </div>
       <div class="login__buttons">
-        <button class="login__button" type="submit">Login</button>
-        <button class="login__button" type="submit" formaction="/new-account">New account</button>
+        <button class="login__button" type="submit" class="admin-page__button">Login</button>
+        <button class="login__button" type="submit" formaction="/new-account" class="admin-page__button">New account</button>
       </div>
     </form>
     <h3 class="login__message">${message}</h3>

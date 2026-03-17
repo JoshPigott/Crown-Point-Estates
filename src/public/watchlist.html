@@ -18,8 +18,15 @@
       <a href="index.html" class="header__link">Home</a>
     </header>
     <main>
-      <div>This is the watch list</div>
-      <div hx-get="/watch-list-get" hx-trigger="load"></div>
+      <div class="watchlist">
+        <h2 class="watchlist__title">Watchlist</h2>
+        <div
+          hx-get="/watchlist-get"
+          hx-trigger="load"
+          class="watchlist__listings"
+        >
+        </div>
+      </div>
     </main>
     <footer>
       <div class="footer__description">
@@ -35,6 +42,6 @@
         >crownpointestates@gmail.com</a>
       </div>
     </footer>
-    <script src="./setup-session.js" type="module"></script>
+    <script src="./scripts/setup-session.js" type="module"></script>
   </body>
 </html>

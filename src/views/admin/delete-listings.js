@@ -4,9 +4,9 @@ import { escapeHtml } from "../../utils/escape-html.js";
 export function deleteListingsView(listings) {
   return listings.map((listing) =>
     /*html*/ ` 
-    <div>
+    <div class="listing-delete">
       <p>${escapeHtml(listing.name)}</p>
-      <button hx-delete="/delete-listing/${listing.id}" hx-swap="delete" hx-target="closest div">Delete listing</button>
+      <button hx-delete="/delete-listing/${listing.id}" hx-swap="delete" hx-target="closest div" class="button">Delete listing</button>
     </div>
     `
   ).join("");
