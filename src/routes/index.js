@@ -24,8 +24,8 @@ const routingTablePublic = [
   {method: "GET",    path: "/get-listings",                  handler: getListings},
   {method: "GET",    path: "/get-listing-page/:listingId",   handler: getListingPage},
   {method: "POST",   path: "/watch-list-add/:listingId",     handler: addToWatchlist},
-  {method: "GET",    path: "/watch-list-get",                handler: getWatchlist},
-  {method: "DELETE", path: "/watch-list-delete/:listingId",  handler: removeFromWatchlist}, 
+  {method: "GET",    path: "/watchlist-get",                 handler: getWatchlist},
+  {method: "DELETE", path: "/watchlist-delete/:listingId",   handler: removeFromWatchlist}, 
 ];
 
 // Caches the tables for speed and cleaness

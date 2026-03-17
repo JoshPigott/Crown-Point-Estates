@@ -17,7 +17,7 @@ async function server(req) {
   const url = new URL(req.url);
   const pathname = url.pathname;
   const method = req.method;
-  console.log(`There has been a request from ${pathname}`);
+  console.log("THis is the pathname", pathname);
 
   // If a static file it gets served
   const staticFile = await serveStaticFiles(req, pathname, subdomain);
